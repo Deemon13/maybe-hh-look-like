@@ -1,10 +1,14 @@
 import { useEffect } from "react";
+import { Group, Pagination } from "@mantine/core";
+
 import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../processes/redux/hooks/redux";
 
 import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
+
+import { setCurrentPage } from "../../processes/redux/reducers/vacanciesSlice";
 
 import "./App.css";
 
@@ -25,6 +29,8 @@ export const App = () => {
     (state) => state.vacanciesReducer.vacancies
   );
 
+  const pages = useTypedSelector((state) => state.vacanciesReducer.pages);
+
   useEffect(() => {
     dispatch(
       fetchVacancies({ page: currentPage, text: searchText, area: currentArea })
@@ -42,6 +48,18 @@ export const App = () => {
           );
         })}
       </ul>
+      <Pagination.Root
+        total={pages}
+        onChange={(e) => dispatch(setCurrentPage(e))}
+      >
+        <Group gap={5} justify="center">
+          <Pagination.First />
+          <Pagination.Previous />
+          <Pagination.Items />
+          <Pagination.Next />
+          <Pagination.Last />
+        </Group>
+      </Pagination.Root>
     </div>
   );
 };
