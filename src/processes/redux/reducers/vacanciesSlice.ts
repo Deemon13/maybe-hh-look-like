@@ -2,14 +2,35 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchVacancies } from "./VacanciesThunk";
 
-const initialState = {
+export interface VacanciesType {
+  id: number;
+  name: string;
+  area: {
+    name: string;
+  };
+}
+
+interface VacanciesState {
+  vacancies: VacanciesType[];
+  //   responce: {
+  //     items: VacanciesType[];
+  //     pages: number;
+  //   };
+  status: null | boolean;
+  currentPage: number;
+  currentArea: null | string;
+  searchText: string;
+  pages: number;
+}
+
+const initialState: VacanciesState = {
   vacancies: [],
-  responce: [],
+  //   responce: {},
   status: null,
   currentPage: 1,
   currentArea: null,
   searchText: "",
-  pages: null,
+  pages: 0,
 };
 
 export const vacanciesSlice = createSlice({
@@ -27,9 +48,11 @@ export const vacanciesSlice = createSlice({
       })
       .addCase(fetchVacancies.fulfilled, (state, action) => {
         state.status = false;
-        state.responce = action.payload;
-        state.vacancies = state.responce.items;
-        state.pages = state.responce.pages -= 1;
+        const { items, pages }: { items: VacanciesType[]; pages: number } =
+          action.payload;
+        // state.responce = action.payload;
+        state.vacancies = items;
+        state.pages = pages - 1;
       })
       .addCase(fetchVacancies.rejected, (state) => {
         state.status = false;
