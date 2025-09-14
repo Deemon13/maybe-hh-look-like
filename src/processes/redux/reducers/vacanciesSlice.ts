@@ -19,6 +19,7 @@ interface VacanciesState {
   status: null | boolean;
   currentPage: number;
   currentArea: null | string;
+  skill_set: string[];
   searchText: string;
   pages: number;
 }
@@ -28,6 +29,7 @@ const initialState: VacanciesState = {
   //   responce: {},
   status: null,
   currentPage: 1,
+  skill_set: ["TypeScript", "React", "Redux"],
   currentArea: null,
   searchText: "",
   pages: 0,
@@ -39,6 +41,21 @@ export const vacanciesSlice = createSlice({
   reducers: {
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    addSkill: (state, action) => {
+      const newSkillSet = state.skill_set.map((skill) => skill.toLowerCase());
+
+      if (newSkillSet.includes(action.payload.toLowerCase())) {
+        console.log("already exist");
+        state.skill_set = [...state.skill_set];
+      } else {
+        state.skill_set = [...state.skill_set, action.payload];
+      }
+    },
+    removeSkill: (state, action) => {
+      state.skill_set = state.skill_set.filter(
+        (skill) => skill !== action.payload
+      );
     },
   },
   extraReducers: (builder) => {
@@ -60,6 +77,6 @@ export const vacanciesSlice = createSlice({
   },
 });
 
-export const { setCurrentPage } = vacanciesSlice.actions;
+export const { setCurrentPage, addSkill, removeSkill } = vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;
