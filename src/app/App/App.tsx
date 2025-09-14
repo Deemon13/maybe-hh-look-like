@@ -7,6 +7,7 @@ import {
   TextInput,
   Pill,
   InputBase,
+  Select,
 } from "@mantine/core";
 
 import {
@@ -20,13 +21,12 @@ import {
   setCurrentPage,
   addSkill,
   removeSkill,
+  selectArea,
 } from "../../processes/redux/reducers/vacanciesSlice";
 
 import "./App.css";
 
 export const App = () => {
-  const [skillInput, setSkillInput] = useState("");
-
   const dispatch = useTypedDispatch();
 
   const vacancies = useTypedSelector(
@@ -44,6 +44,9 @@ export const App = () => {
   );
   const skills = useTypedSelector((state) => state.vacanciesReducer.skill_set);
   const pages = useTypedSelector((state) => state.vacanciesReducer.pages);
+
+  const [skillInput, setSkillInput] = useState("");
+  const [areaInput, setAreaInput] = useState(currentArea);
 
   const addSkillPill = useCallback(() => {
     dispatch(addSkill(skillInput.trim()));
@@ -75,7 +78,7 @@ export const App = () => {
         area: currentArea,
       })
     );
-  }, [currentArea, currentPage, dispatch, searchText, skills]);
+  }, [areaInput, currentArea, currentPage, dispatch, searchText, skills]);
 
   useEffect(() => {
     const onEnter = (evt: { code: string }) => {
@@ -97,6 +100,11 @@ export const App = () => {
       return;
     }
     addSkillPill();
+  };
+
+  const handleSelectArea = (evt: string | null) => {
+    dispatch(selectArea(evt));
+    setAreaInput(evt);
   };
 
   return (
@@ -133,6 +141,19 @@ export const App = () => {
         <InputBase component="div" multiline>
           <Pill.Group>{skillPills}</Pill.Group>
         </InputBase>
+      </div>
+
+      <div>
+        <Select
+          data={["Все города", "Москва", "Санкт-Петербург"]}
+          leftSectionPointerEvents="none"
+          leftSection={"@"}
+          value={areaInput}
+          onOptionSubmit={handleSelectArea}
+          onClear={() => handleSelectArea(null)}
+          placeholder="Все города"
+          clearable
+        />
       </div>
 
       <Pagination.Root

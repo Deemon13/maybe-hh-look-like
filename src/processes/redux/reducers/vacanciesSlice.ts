@@ -31,6 +31,7 @@ const initialState: VacanciesState = {
   currentPage: 1,
   skill_set: ["TypeScript", "React", "Redux"],
   currentArea: null,
+
   searchText: "",
   pages: 0,
 };
@@ -57,6 +58,23 @@ export const vacanciesSlice = createSlice({
         (skill) => skill !== action.payload
       );
     },
+    selectArea: (state, action) => {
+      switch (action.payload) {
+        case "Все города":
+          state.currentArea = null;
+          break;
+        case "Москва":
+          state.currentArea = "1";
+          break;
+        case "Санкт-Петербург":
+          state.currentArea = "2";
+          break;
+        default:
+          state.currentArea = null;
+          break;
+      }
+      state.currentPage = 1;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,6 +95,7 @@ export const vacanciesSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, addSkill, removeSkill } = vacanciesSlice.actions;
+export const { setCurrentPage, addSkill, removeSkill, selectArea } =
+  vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;
