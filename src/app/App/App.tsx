@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
+  AppShell,
   Title,
   Button,
   Group,
@@ -25,6 +26,8 @@ import {
   removeSkill,
   selectArea,
 } from "../../processes/redux/reducers/vacanciesSlice";
+
+import { Header } from "../../widgets";
 
 import "./App.css";
 
@@ -114,90 +117,93 @@ export const App = () => {
 
   const handleClickOnSearch = () => {
     dispatch(inputSearchText(searchInput));
+    dispatch(setCurrentPage(1));
   };
 
   return (
-    <div>
-      <h1>Hello React + Vite + TS + Redux</h1>
+    <AppShell padding="md" header={{ height: 60 }}>
+      <Header />
 
-      <div>
-        <Title>Список вакансий по профессии Frontend-разработчик</Title>
-        <Group>
-          <TextInput
+      <AppShell.Main>
+        <div>
+          <Title>Список вакансий по профессии Frontend-разработчик</Title>
+          <Group>
+            <TextInput
+              leftSectionPointerEvents="none"
+              leftSection={"&"}
+              placeholder="Должность или название компании"
+              value={searchInput}
+              onChange={(evt) => setSearchInput(evt.currentTarget.value)}
+            />
+            <Button
+              onClick={handleClickOnSearch}
+              disabled={searchInput ? false : true}
+            >
+              Найти
+            </Button>
+          </Group>
+        </div>
+
+        <ul>
+          {vacancies.map((item) => {
+            return (
+              <li key={item.id}>
+                {item.name}: {item.area.name}
+              </li>
+            );
+          })}
+        </ul>
+
+        <div>
+          <Title>Ключевые навыки</Title>
+          <Group>
+            <TextInput
+              placeholder="Навык"
+              size="sm"
+              value={skillInput}
+              onChange={(evt) => setSkillInput(evt.currentTarget.value)}
+            />
+            <ActionIcon
+              size="input-sm"
+              variant="default"
+              aria-label="ActionIcon the same size as inputs"
+              onClick={handleClickOnAddSkill}
+            >
+              +
+            </ActionIcon>
+          </Group>
+          <InputBase component="div" multiline>
+            <Pill.Group>{skillPills}</Pill.Group>
+          </InputBase>
+        </div>
+
+        <div>
+          <Select
+            data={["Все города", "Москва", "Санкт-Петербург"]}
             leftSectionPointerEvents="none"
-            leftSection={"&"}
-            placeholder="Должность или название компании"
-            value={searchInput}
-            onChange={(evt) => setSearchInput(evt.currentTarget.value)}
+            leftSection={"@"}
+            value={areaInput}
+            onOptionSubmit={handleSelectArea}
+            onClear={() => handleSelectArea(null)}
+            placeholder="Все города"
+            clearable
           />
-          <Button
-            onClick={handleClickOnSearch}
-            disabled={searchInput ? false : true}
-          >
-            Найти
-          </Button>
-        </Group>
-      </div>
+        </div>
 
-      <ul>
-        {vacancies.map((item) => {
-          return (
-            <li key={item.id}>
-              {item.name}: {item.area.name}
-            </li>
-          );
-        })}
-      </ul>
-
-      <div>
-        <Title>Ключевые навыки</Title>
-        <Group>
-          <TextInput
-            placeholder="Навык"
-            size="sm"
-            value={skillInput}
-            onChange={(evt) => setSkillInput(evt.currentTarget.value)}
-          />
-          <ActionIcon
-            size="input-sm"
-            variant="default"
-            aria-label="ActionIcon the same size as inputs"
-            onClick={handleClickOnAddSkill}
-          >
-            +
-          </ActionIcon>
-        </Group>
-        <InputBase component="div" multiline>
-          <Pill.Group>{skillPills}</Pill.Group>
-        </InputBase>
-      </div>
-
-      <div>
-        <Select
-          data={["Все города", "Москва", "Санкт-Петербург"]}
-          leftSectionPointerEvents="none"
-          leftSection={"@"}
-          value={areaInput}
-          onOptionSubmit={handleSelectArea}
-          onClear={() => handleSelectArea(null)}
-          placeholder="Все города"
-          clearable
-        />
-      </div>
-
-      <Pagination.Root
-        total={pages}
-        value={currentPage}
-        onChange={(e) => dispatch(setCurrentPage(e))}
-      >
-        <Group gap={5} justify="center">
-          <Pagination.First />
-          <Pagination.Previous />
-          <Pagination.Items />
-          <Pagination.Next />
-          <Pagination.Last />
-        </Group>
-      </Pagination.Root>
-    </div>
+        <Pagination.Root
+          total={pages}
+          value={currentPage}
+          onChange={(e) => dispatch(setCurrentPage(e))}
+        >
+          <Group gap={5} justify="center">
+            <Pagination.First />
+            <Pagination.Previous />
+            <Pagination.Items />
+            <Pagination.Next />
+            <Pagination.Last />
+          </Group>
+        </Pagination.Root>
+      </AppShell.Main>
+    </AppShell>
   );
 };
