@@ -48,13 +48,17 @@ export const App = () => {
   const addSkillPill = useCallback(() => {
     dispatch(addSkill(skillInput.trim()));
     setSkillInput("");
+    dispatch(setCurrentPage(1));
   }, [dispatch, skillInput]);
 
   const skillPills = skills.map((pill) => (
     <Pill
       key={pill}
       withRemoveButton
-      onRemove={() => dispatch(removeSkill(pill))}
+      onRemove={() => {
+        dispatch(setCurrentPage(1));
+        dispatch(removeSkill(pill));
+      }}
     >
       {pill}
     </Pill>
@@ -133,6 +137,7 @@ export const App = () => {
 
       <Pagination.Root
         total={pages}
+        value={currentPage}
         onChange={(e) => dispatch(setCurrentPage(e))}
       >
         <Group gap={5} justify="center">
