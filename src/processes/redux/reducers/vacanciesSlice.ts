@@ -43,6 +43,9 @@ export const vacanciesSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+    inputSearchText: (state, action) => {
+      state.searchText = action.payload;
+    },
     addSkill: (state, action) => {
       const newSkillSet = state.skill_set.map((skill) => skill.toLowerCase());
 
@@ -95,7 +98,12 @@ export const vacanciesSlice = createSlice({
   },
 });
 
-export const { setCurrentPage, addSkill, removeSkill, selectArea } =
-  vacanciesSlice.actions;
+export const {
+  setCurrentPage,
+  inputSearchText,
+  addSkill,
+  removeSkill,
+  selectArea,
+} = vacanciesSlice.actions;
 
 export default vacanciesSlice.reducer;

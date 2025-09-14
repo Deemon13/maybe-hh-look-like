@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   Title,
+  Button,
   Group,
   Pagination,
   ActionIcon,
@@ -19,6 +20,7 @@ import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
 import {
   setCurrentPage,
+  inputSearchText,
   addSkill,
   removeSkill,
   selectArea,
@@ -47,6 +49,7 @@ export const App = () => {
 
   const [skillInput, setSkillInput] = useState("");
   const [areaInput, setAreaInput] = useState(currentArea);
+  const [searchInput, setSearchInput] = useState(searchText);
 
   const addSkillPill = useCallback(() => {
     dispatch(addSkill(skillInput.trim()));
@@ -69,7 +72,9 @@ export const App = () => {
 
   useEffect(() => {
     const searchSkills = skills.join(" AND ");
-    const searchParams = `${searchSkills}`;
+    const searchParams = searchText
+      ? `${searchText} AND ${searchSkills}`
+      : `${searchSkills}`;
 
     dispatch(
       fetchVacancies({
@@ -107,9 +112,33 @@ export const App = () => {
     setAreaInput(evt);
   };
 
+  const handleClickOnSearch = () => {
+    dispatch(inputSearchText(searchInput));
+  };
+
   return (
     <div>
       <h1>Hello React + Vite + TS + Redux</h1>
+
+      <div>
+        <Title>Список вакансий по профессии Frontend-разработчик</Title>
+        <Group>
+          <TextInput
+            leftSectionPointerEvents="none"
+            leftSection={"&"}
+            placeholder="Должность или название компании"
+            value={searchInput}
+            onChange={(evt) => setSearchInput(evt.currentTarget.value)}
+          />
+          <Button
+            onClick={handleClickOnSearch}
+            disabled={searchInput ? false : true}
+          >
+            Найти
+          </Button>
+        </Group>
+      </div>
+
       <ul>
         {vacancies.map((item) => {
           return (
