@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AppShell, Group, Pagination, Select } from "@mantine/core";
+import { useEffect } from "react";
+import { AppShell, Group, Pagination } from "@mantine/core";
 
 import {
   useTypedDispatch,
@@ -8,12 +8,9 @@ import {
 
 import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
-import {
-  setCurrentPage,
-  selectArea,
-} from "../../processes/redux/reducers/vacanciesSlice";
+import { setCurrentPage } from "../../processes/redux/reducers/vacanciesSlice";
 
-import { Header, SearchBar, SkillBox } from "../../widgets";
+import { Header, SearchBar, SkillBox, AreaSelect } from "../../widgets";
 
 import styles from "./App.module.css";
 
@@ -36,8 +33,6 @@ export const App = () => {
   const skills = useTypedSelector((state) => state.vacanciesReducer.skill_set);
   const pages = useTypedSelector((state) => state.vacanciesReducer.pages);
 
-  const [areaInput, setAreaInput] = useState(currentArea);
-
   useEffect(() => {
     const searchSkills = skills.join(" AND ");
     const searchParams = searchText
@@ -51,12 +46,7 @@ export const App = () => {
         area: currentArea,
       })
     );
-  }, [areaInput, currentArea, currentPage, dispatch, searchText, skills]);
-
-  const handleSelectArea = (evt: string | null) => {
-    dispatch(selectArea(evt));
-    setAreaInput(evt);
-  };
+  }, [currentArea, currentPage, dispatch, searchText, skills]);
 
   return (
     <AppShell padding="md" header={{ height: 60 }}>
@@ -67,18 +57,7 @@ export const App = () => {
 
         <SkillBox />
 
-        <div>
-          <Select
-            data={["Все города", "Москва", "Санкт-Петербург"]}
-            leftSectionPointerEvents="none"
-            leftSection={"@"}
-            value={areaInput}
-            onOptionSubmit={handleSelectArea}
-            onClear={() => handleSelectArea(null)}
-            placeholder="Все города"
-            clearable
-          />
-        </div>
+        <AreaSelect />
 
         <div>
           <ul>
