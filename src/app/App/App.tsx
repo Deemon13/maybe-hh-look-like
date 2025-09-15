@@ -27,7 +27,7 @@ import {
 
 import { Header, SearchBar } from "../../widgets";
 
-import "./App.css";
+import styles from "./App.module.css";
 
 export const App = () => {
   const dispatch = useTypedDispatch();
@@ -116,7 +116,7 @@ export const App = () => {
     <AppShell padding="md" header={{ height: 60 }}>
       <Header />
 
-      <AppShell.Main>
+      <AppShell.Main className={styles.main}>
         <SearchBar />
 
         <ul>
