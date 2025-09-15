@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AppShell, Group, Pagination } from "@mantine/core";
+import { AppShell } from "@mantine/core";
 
 import {
   useTypedDispatch,
@@ -8,9 +8,13 @@ import {
 
 import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
-import { setCurrentPage } from "../../processes/redux/reducers/vacanciesSlice";
-
-import { Header, SearchBar, SkillBox, AreaSelect } from "../../widgets";
+import {
+  Header,
+  SearchBar,
+  SkillBox,
+  AreaSelect,
+  PaginationUI,
+} from "../../widgets";
 
 import styles from "./App.module.css";
 
@@ -31,7 +35,6 @@ export const App = () => {
     (state) => state.vacanciesReducer.searchText
   );
   const skills = useTypedSelector((state) => state.vacanciesReducer.skill_set);
-  const pages = useTypedSelector((state) => state.vacanciesReducer.pages);
 
   useEffect(() => {
     const searchSkills = skills.join(" AND ");
@@ -69,19 +72,8 @@ export const App = () => {
               );
             })}
           </ul>
-          <Pagination.Root
-            total={pages}
-            value={currentPage}
-            onChange={(e) => dispatch(setCurrentPage(e))}
-          >
-            <Group gap={5} justify="center">
-              <Pagination.First />
-              <Pagination.Previous />
-              <Pagination.Items />
-              <Pagination.Next />
-              <Pagination.Last />
-            </Group>
-          </Pagination.Root>
+
+          <PaginationUI />
         </div>
       </AppShell.Main>
     </AppShell>
