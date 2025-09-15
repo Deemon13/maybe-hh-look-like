@@ -1,6 +1,6 @@
 import { AppShell } from "@mantine/core";
 
-import { Logo, NavHeader } from "../../../shared";
+import { Logo, NavHeader } from "../../shared";
 
 import styles from "./Header.module.css";
 

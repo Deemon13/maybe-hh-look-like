@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import {
   AppShell,
   Title,
-  Button,
   Group,
   Pagination,
   ActionIcon,
@@ -21,13 +20,12 @@ import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
 import {
   setCurrentPage,
-  inputSearchText,
   addSkill,
   removeSkill,
   selectArea,
 } from "../../processes/redux/reducers/vacanciesSlice";
 
-import { Header } from "../../widgets";
+import { Header, SearchBar } from "../../widgets";
 
 import "./App.css";
 
@@ -52,7 +50,6 @@ export const App = () => {
 
   const [skillInput, setSkillInput] = useState("");
   const [areaInput, setAreaInput] = useState(currentArea);
-  const [searchInput, setSearchInput] = useState(searchText);
 
   const addSkillPill = useCallback(() => {
     dispatch(addSkill(skillInput.trim()));
@@ -115,34 +112,12 @@ export const App = () => {
     setAreaInput(evt);
   };
 
-  const handleClickOnSearch = () => {
-    dispatch(inputSearchText(searchInput));
-    dispatch(setCurrentPage(1));
-  };
-
   return (
     <AppShell padding="md" header={{ height: 60 }}>
       <Header />
 
       <AppShell.Main>
-        <div>
-          <Title>Список вакансий по профессии Frontend-разработчик</Title>
-          <Group>
-            <TextInput
-              leftSectionPointerEvents="none"
-              leftSection={"&"}
-              placeholder="Должность или название компании"
-              value={searchInput}
-              onChange={(evt) => setSearchInput(evt.currentTarget.value)}
-            />
-            <Button
-              onClick={handleClickOnSearch}
-              disabled={searchInput ? false : true}
-            >
-              Найти
-            </Button>
-          </Group>
-        </div>
+        <SearchBar />
 
         <ul>
           {vacancies.map((item) => {
