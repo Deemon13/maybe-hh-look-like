@@ -1,15 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import {
-  AppShell,
-  Title,
-  Group,
-  Pagination,
-  ActionIcon,
-  TextInput,
-  Pill,
-  InputBase,
-  Select,
-} from "@mantine/core";
+import { useEffect, useState } from "react";
+import { AppShell, Group, Pagination, Select } from "@mantine/core";
 
 import {
   useTypedDispatch,
@@ -20,12 +10,10 @@ import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
 import {
   setCurrentPage,
-  addSkill,
-  removeSkill,
   selectArea,
 } from "../../processes/redux/reducers/vacanciesSlice";
 
-import { Header, SearchBar } from "../../widgets";
+import { Header, SearchBar, SkillBox } from "../../widgets";
 
 import styles from "./App.module.css";
 
@@ -48,27 +36,7 @@ export const App = () => {
   const skills = useTypedSelector((state) => state.vacanciesReducer.skill_set);
   const pages = useTypedSelector((state) => state.vacanciesReducer.pages);
 
-  const [skillInput, setSkillInput] = useState("");
   const [areaInput, setAreaInput] = useState(currentArea);
-
-  const addSkillPill = useCallback(() => {
-    dispatch(addSkill(skillInput.trim()));
-    setSkillInput("");
-    dispatch(setCurrentPage(1));
-  }, [dispatch, skillInput]);
-
-  const skillPills = skills.map((pill) => (
-    <Pill
-      key={pill}
-      withRemoveButton
-      onRemove={() => {
-        dispatch(setCurrentPage(1));
-        dispatch(removeSkill(pill));
-      }}
-    >
-      {pill}
-    </Pill>
-  ));
 
   useEffect(() => {
     const searchSkills = skills.join(" AND ");
@@ -85,28 +53,6 @@ export const App = () => {
     );
   }, [areaInput, currentArea, currentPage, dispatch, searchText, skills]);
 
-  useEffect(() => {
-    const onEnter = (evt: { code: string }) => {
-      if (!skillInput) {
-        return;
-      }
-
-      if (evt.code === "Enter" || evt.code === "NumpadEnter") {
-        addSkillPill();
-      }
-    };
-
-    document.addEventListener("keydown", onEnter);
-    return () => document.removeEventListener("keydown", onEnter);
-  }, [addSkillPill, skillInput]);
-
-  const handleClickOnAddSkill = () => {
-    if (!skillInput) {
-      return;
-    }
-    addSkillPill();
-  };
-
   const handleSelectArea = (evt: string | null) => {
     dispatch(selectArea(evt));
     setAreaInput(evt);
@@ -119,38 +65,7 @@ export const App = () => {
       <AppShell.Main className={styles.main}>
         <SearchBar />
 
-        <ul>
-          {vacancies.map((item) => {
-            return (
-              <li key={item.id}>
-                {item.name}: {item.area.name}
-              </li>
-            );
-          })}
-        </ul>
-
-        <div>
-          <Title>Ключевые навыки</Title>
-          <Group>
-            <TextInput
-              placeholder="Навык"
-              size="sm"
-              value={skillInput}
-              onChange={(evt) => setSkillInput(evt.currentTarget.value)}
-            />
-            <ActionIcon
-              size="input-sm"
-              variant="default"
-              aria-label="ActionIcon the same size as inputs"
-              onClick={handleClickOnAddSkill}
-            >
-              +
-            </ActionIcon>
-          </Group>
-          <InputBase component="div" multiline>
-            <Pill.Group>{skillPills}</Pill.Group>
-          </InputBase>
-        </div>
+        <SkillBox />
 
         <div>
           <Select
@@ -165,19 +80,30 @@ export const App = () => {
           />
         </div>
 
-        <Pagination.Root
-          total={pages}
-          value={currentPage}
-          onChange={(e) => dispatch(setCurrentPage(e))}
-        >
-          <Group gap={5} justify="center">
-            <Pagination.First />
-            <Pagination.Previous />
-            <Pagination.Items />
-            <Pagination.Next />
-            <Pagination.Last />
-          </Group>
-        </Pagination.Root>
+        <div>
+          <ul>
+            {vacancies.map((item) => {
+              return (
+                <li key={item.id}>
+                  {item.name}: {item.area.name}
+                </li>
+              );
+            })}
+          </ul>
+          <Pagination.Root
+            total={pages}
+            value={currentPage}
+            onChange={(e) => dispatch(setCurrentPage(e))}
+          >
+            <Group gap={5} justify="center">
+              <Pagination.First />
+              <Pagination.Previous />
+              <Pagination.Items />
+              <Pagination.Next />
+              <Pagination.Last />
+            </Group>
+          </Pagination.Root>
+        </div>
       </AppShell.Main>
     </AppShell>
   );
