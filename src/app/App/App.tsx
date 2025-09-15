@@ -8,6 +8,8 @@ import {
 
 import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
+import { VacanciesList } from "../../pages";
+
 import {
   Header,
   SearchBar,
@@ -57,23 +59,18 @@ export const App = () => {
 
       <AppShell.Main className={styles.main}>
         <SearchBar />
-
-        <SkillBox />
-
-        <AreaSelect />
-
         <div>
-          <ul>
-            {vacancies.map((item) => {
-              return (
-                <li key={item.id}>
-                  {item.name}: {item.area.name}
-                </li>
-              );
-            })}
-          </ul>
+          <div>
+            <SkillBox />
 
-          <PaginationUI />
+            <AreaSelect />
+          </div>
+
+          <div>
+            <VacanciesList items={vacancies} />
+
+            <PaginationUI />
+          </div>
         </div>
       </AppShell.Main>
     </AppShell>
