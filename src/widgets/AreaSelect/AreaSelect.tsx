@@ -8,6 +8,10 @@ import {
 
 import { selectArea } from "../../processes/redux/reducers/vacanciesSlice";
 
+import MapPin from "../../app/assets/main/map-pin.svg";
+
+import styles from "./AreaSelect.module.css";
+
 export const AreaSelect = () => {
   const dispatch = useTypedDispatch();
 
@@ -22,12 +26,14 @@ export const AreaSelect = () => {
     setAreaInput(evt);
   };
 
+  const mapPin = <img src={MapPin} alt="map-pin-icon" />;
+
   return (
-    <div>
+    <div className={styles["area-select__container"]}>
       <Select
         data={["Все города", "Москва", "Санкт-Петербург"]}
         leftSectionPointerEvents="none"
-        leftSection={"@"}
+        leftSection={mapPin}
         value={areaInput}
         onOptionSubmit={handleSelectArea}
         onClear={() => handleSelectArea(null)}

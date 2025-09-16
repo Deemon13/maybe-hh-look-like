@@ -12,6 +12,8 @@ import {
   inputSearchText,
 } from "../../processes/redux/reducers/vacanciesSlice";
 
+import SearchIcon from "../../app/assets/search-bar/search.svg";
+
 import styles from "./SearchBar.module.css";
 
 export const SearchBar = () => {
@@ -28,6 +30,8 @@ export const SearchBar = () => {
     dispatch(setCurrentPage(1));
   };
 
+  const searchIcon = <img src={SearchIcon} alt="search-icon" />;
+
   return (
     <div className={styles["searchbar__container"]}>
       <div className={styles["searchbar__wrapper"]}>
@@ -43,7 +47,7 @@ export const SearchBar = () => {
           <TextInput
             className={styles["searchbar__input"]}
             leftSectionPointerEvents="none"
-            leftSection={"&"}
+            leftSection={searchIcon}
             placeholder="Должность или название компании"
             value={searchInput}
             onChange={(evt) => setSearchInput(evt.currentTarget.value)}
