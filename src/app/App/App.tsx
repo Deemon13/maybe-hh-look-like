@@ -59,8 +59,8 @@ export const App = () => {
 
       <AppShell.Main className={styles.main}>
         <SearchBar />
-        <div>
-          <div>
+        <div className={styles.vacancies}>
+          <div className={styles["search-params"]}>
             <SkillBox />
 
             <AreaSelect />

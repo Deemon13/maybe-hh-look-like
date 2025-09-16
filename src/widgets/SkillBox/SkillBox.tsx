@@ -1,13 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import {
-  Title,
-  Group,
-  ActionIcon,
-  TextInput,
-  Pill,
-  InputBase,
-} from "@mantine/core";
+import { Title, Group, ActionIcon, TextInput, Pill } from "@mantine/core";
 
 import {
   useTypedDispatch,
@@ -19,6 +12,10 @@ import {
   addSkill,
   removeSkill,
 } from "../../processes/redux/reducers/vacanciesSlice";
+
+import AddIcon from "../../app/assets/main/add-icon.svg";
+
+import styles from "./SkillBox.module.css";
 
 export const SkillBox = () => {
   const dispatch = useTypedDispatch();
@@ -69,27 +66,35 @@ export const SkillBox = () => {
   ));
 
   return (
-    <div>
-      <Title>Ключевые навыки</Title>
-      <Group>
+    <div className={styles["skillbox__container"]}>
+      <Title className={styles["skillbox__title"]}>Ключевые навыки</Title>
+      <Group className={styles["skillbox__input-bar"]}>
         <TextInput
           placeholder="Навык"
           size="sm"
+          radius={8}
           value={skillInput}
           onChange={(evt) => setSkillInput(evt.currentTarget.value)}
+          className={styles["skillbox__input"]}
         />
         <ActionIcon
           size="input-sm"
           variant="default"
+          radius={8}
           aria-label="ActionIcon the same size as inputs"
           onClick={handleClickOnAddSkill}
+          className={styles["skillbox__add-skill-btn"]}
         >
-          +
+          <img
+            src={AddIcon}
+            alt="add-icon"
+            className={styles["skillbox__add-skill-icon"]}
+          />
         </ActionIcon>
       </Group>
-      <InputBase component="div" multiline>
-        <Pill.Group>{skillPills}</Pill.Group>
-      </InputBase>
+      <Pill.Group className={styles["skillbox__skill-set"]}>
+        {skillPills}
+      </Pill.Group>
     </div>
   );
 };
