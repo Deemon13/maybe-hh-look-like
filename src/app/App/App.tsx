@@ -66,7 +66,7 @@ export const App = () => {
             <AreaSelect />
           </div>
 
-          <div>
+          <div className={styles["vacancies-field"]}>
             <VacanciesList items={vacancies} />
 
             <PaginationUI />
