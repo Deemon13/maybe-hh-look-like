@@ -9,12 +9,12 @@ export interface VacanciesType {
     name: string;
   };
   salary: {
-    from?: number;
-    to?: number;
-    currency?: string;
+    from: number;
+    to: number;
+    currency: string;
   };
   experience: {
-    name: string;
+    id: string;
   };
   employer: {
     name: string;

@@ -8,6 +8,56 @@ interface VacancyCardProps {
   item: VacanciesType;
 }
 
+const getSalary = (
+  data: { from: number; to: number; currency: string } | null
+) => {
+  if (!data) {
+    return null;
+  }
+
+  let salary = "";
+
+  if (data.from === data.to || !data.from) {
+    salary = `${data.to} ${data.currency}`;
+  } else if (!data.to) {
+    salary = `От ${data.from} ${data.currency}`;
+  } else {
+    salary = `${data.from} - ${data.to} ${data.currency}`;
+  }
+
+  return (
+    <div className={styles["vacancy-card__salary-container"]}>{salary}</div>
+  );
+};
+
+const getExperience = (data: { id: string } | null) => {
+  if (!data) {
+    return null;
+  }
+
+  let experience = "";
+
+  switch (data.id) {
+    case "noExperience":
+      experience = "Без опыта";
+      break;
+    case "between1And3":
+      experience = "Опыт 1-3 года";
+      break;
+    case "between3And6":
+      experience = "Опыт 3-6 лет";
+      break;
+    case "moreThan6":
+      experience = "Опыт более 6 лет";
+      break;
+
+    default:
+      break;
+  }
+
+  return <p className={styles["vacancy-card__experience"]}>{experience}</p>;
+};
+
 const getWorkFormat = (data: [{ id: string }] | [] | null) => {
   if (data?.length === 0 || !data) {
     return null;
@@ -47,31 +97,44 @@ const getWorkFormat = (data: [{ id: string }] | [] | null) => {
   });
 };
 
+const getArea = (data: string | null) => {
+  if (!data) {
+    return null;
+  }
+
+  if (data === "Москва" || data === "Санкт-Петербург") {
+    return null;
+  }
+
+  return <p className={styles["vacancy-card__area"]}>{data}</p>;
+};
+
 export const VacancyCard = ({ item }: VacancyCardProps) => {
   return (
     <li className={styles["vacancy-card__item"]}>
-      <h2 className={styles["vacancy-card__title"]}>{item.name}</h2>
-      <div className={styles["vacancy-card__salary-currency-experience"]}>
-        <div className={styles["vacancy-card__salary-container"]}>
-          <span className={styles["vacancy-card__salary"]}>
-            {item.salary && item.salary.from}
-          </span>{" "}
-          -{" "}
-          <span className={styles["vacancy-card__salary"]}>
-            {item.salary && item.salary.to}
-          </span>{" "}
-          {item.salary && <span>{item.salary.currency}</span>}
-        </div>
-        <p className={styles["vacancy-card__experience"]}>
-          {item.experience.name}
-        </p>
-      </div>
+      {item.name && (
+        <h2 className={styles["vacancy-card__title"]}>{item.name}</h2>
+      )}
 
-      <p className={styles["vacancy-card__employer"]}>{item.employer.name}</p>
-      <div className={styles["vacancy-card__work-format"]}>
-        {getWorkFormat(item.work_format)}
-      </div>
-      <p className={styles["vacancy-card__area"]}>{item.area.name}</p>
+      {(item.salary || item.experience) && (
+        <div className={styles["vacancy-card__salary-currency-experience"]}>
+          {getSalary(item.salary)}
+          {getExperience(item.experience)}
+        </div>
+      )}
+
+      {item.employer.name && (
+        <p className={styles["vacancy-card__employer"]}>{item.employer.name}</p>
+      )}
+
+      {item.work_format && (
+        <div className={styles["vacancy-card__work-format"]}>
+          {getWorkFormat(item.work_format)}
+        </div>
+      )}
+
+      {getArea(item.area.name)}
+
       <div className={styles["vacancy-card__actions"]}>
         <button
           type="button"
