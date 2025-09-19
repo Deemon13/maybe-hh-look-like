@@ -3,9 +3,23 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchVacancies } from "./VacanciesThunk";
 
 export interface VacanciesType {
-  id: number;
+  id: string;
   name: string;
   area: {
+    name: string;
+  };
+  salary: {
+    from?: number;
+    to?: number;
+    currency?: string;
+  };
+  experience: {
+    name: string;
+  };
+  employer: {
+    name: string;
+  };
+  schedule: {
     name: string;
   };
 }
