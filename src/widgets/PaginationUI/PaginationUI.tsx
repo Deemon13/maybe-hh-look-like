@@ -1,4 +1,4 @@
-import { Group, Pagination } from "@mantine/core";
+import { Group, Pagination, useMantineTheme } from "@mantine/core";
 
 import {
   useTypedDispatch,
@@ -16,11 +16,14 @@ export const PaginationUI = () => {
 
   const pages = useTypedSelector((state) => state.vacanciesReducer.pages);
 
+  const theme = useMantineTheme();
+
   return (
     <Pagination.Root
       total={pages}
       value={currentPage}
       onChange={(e) => dispatch(setCurrentPage(e))}
+      color={theme.primaryColor}
     >
       <Group gap={5} justify="center">
         <Pagination.First />

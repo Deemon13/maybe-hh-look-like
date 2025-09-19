@@ -1,9 +1,6 @@
 import { Badge } from "@mantine/core";
 
-import {
-  //   useTypedDispatch,
-  useTypedSelector,
-} from "../../../processes/redux/hooks/redux";
+import { useTypedSelector } from "../../../processes/redux/hooks/redux";
 
 import type { VacanciesType } from "../../../processes/redux/reducers/vacanciesSlice";
 
