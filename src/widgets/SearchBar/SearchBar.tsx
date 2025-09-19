@@ -28,6 +28,7 @@ export const SearchBar = () => {
   const handleClickOnSearch = () => {
     dispatch(inputSearchText(searchInput));
     dispatch(setCurrentPage(1));
+    setSearchInput("");
   };
 
   const searchIcon = <img src={SearchIcon} alt="search-icon" />;

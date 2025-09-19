@@ -118,11 +118,7 @@ const getArea = (data: string | null, currentArea: string | null) => {
 };
 
 const openVacancyInNewTab = (id: string) => {
-  window.open(
-    `https://energodar.hh.ru/vacancy/${id}`,
-    "_blanc",
-    "noopener, noreferrer"
-  );
+  window.open(`https://hh.ru/vacancy/${id}`, "_blanc", "noopener, noreferrer");
 };
 
 export const VacancyCard = ({ item }: VacancyCardProps) => {
