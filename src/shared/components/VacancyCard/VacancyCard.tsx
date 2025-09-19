@@ -117,6 +117,14 @@ const getArea = (data: string | null, currentArea: string | null) => {
   return <p className={styles["vacancy-card__area"]}>{data}</p>;
 };
 
+const openVacancyInNewTab = (id: string) => {
+  window.open(
+    `https://energodar.hh.ru/vacancy/${id}`,
+    "_blanc",
+    "noopener, noreferrer"
+  );
+};
+
 export const VacancyCard = ({ item }: VacancyCardProps) => {
   const currentArea = useTypedSelector(
     (state) => state.vacanciesReducer.currentArea
@@ -157,6 +165,7 @@ export const VacancyCard = ({ item }: VacancyCardProps) => {
         <button
           type="button"
           className={styles["vacancy-card__action--respond"]}
+          onClick={() => openVacancyInNewTab(item.id)}
         >
           Откликнуться
         </button>
