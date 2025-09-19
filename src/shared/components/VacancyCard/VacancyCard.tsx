@@ -1,3 +1,5 @@
+import { Badge } from "@mantine/core";
+
 import type { VacanciesType } from "../../../processes/redux/reducers/vacanciesSlice";
 
 import styles from "./VacancyCard.module.css";
@@ -5,6 +7,45 @@ import styles from "./VacancyCard.module.css";
 interface VacancyCardProps {
   item: VacanciesType;
 }
+
+const getWorkFormat = (data: [{ id: string }] | [] | null) => {
+  if (data?.length === 0 || !data) {
+    return null;
+  }
+
+  let workFormat = "";
+  let color = "";
+
+  return data.map((item) => {
+    switch (item.id) {
+      case "ON_SITE":
+        workFormat = "Офис";
+        color = "rgba(15, 15, 16, 0.5)";
+        break;
+      case "REMOTE":
+        workFormat = "Можно удалённо";
+        color = "#4263eb";
+        break;
+      case "FIELD_WORK":
+        workFormat = "Разъездной";
+        color = "rgba(15, 15, 16, 0.2)";
+        break;
+      case "HYBRID":
+        workFormat = "Гибрид";
+        color = "#0f0f10";
+        break;
+
+      default:
+        break;
+    }
+
+    return (
+      <Badge radius={2} color={color} key={item.id}>
+        {workFormat}
+      </Badge>
+    );
+  });
+};
 
 export const VacancyCard = ({ item }: VacancyCardProps) => {
   return (
@@ -27,9 +68,9 @@ export const VacancyCard = ({ item }: VacancyCardProps) => {
       </div>
 
       <p className={styles["vacancy-card__employer"]}>{item.employer.name}</p>
-      <p className={styles["vacancy-card__schedule"]}>
-        {item.schedule.name} - ?
-      </p>
+      <div className={styles["vacancy-card__work-format"]}>
+        {getWorkFormat(item.work_format)}
+      </div>
       <p className={styles["vacancy-card__area"]}>{item.area.name}</p>
       <div className={styles["vacancy-card__actions"]}>
         <button

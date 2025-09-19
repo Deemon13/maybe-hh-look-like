@@ -61,11 +61,11 @@
   color: rgba(15, 15, 16, 0.5);
 }
 
-.vacancy-card__schedule {
-  margin-top: 0;
+.vacancy-card__work-format {
   margin-bottom: 4px;
-
-  text-align: left;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
 .vacancy-card__area {

@@ -22,6 +22,7 @@ export interface VacanciesType {
   schedule: {
     name: string;
   };
+  work_format: [{ id: string }];
 }
 
 interface VacanciesState {
