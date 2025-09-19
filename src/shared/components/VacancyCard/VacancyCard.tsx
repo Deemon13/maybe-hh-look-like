@@ -1,5 +1,10 @@
 import { Badge } from "@mantine/core";
 
+import {
+  //   useTypedDispatch,
+  useTypedSelector,
+} from "../../../processes/redux/hooks/redux";
+
 import type { VacanciesType } from "../../../processes/redux/reducers/vacanciesSlice";
 
 import styles from "./VacancyCard.module.css";
@@ -97,12 +102,15 @@ const getWorkFormat = (data: [{ id: string }] | [] | null) => {
   });
 };
 
-const getArea = (data: string | null) => {
+const getArea = (data: string | null, currentArea: string | null) => {
   if (!data) {
     return null;
   }
 
-  if (data === "Москва" || data === "Санкт-Петербург") {
+  if (
+    (data === "Москва" && currentArea === "1") ||
+    (data === "Санкт-Петербург" && currentArea === "2")
+  ) {
     return null;
   }
 
@@ -110,6 +118,10 @@ const getArea = (data: string | null) => {
 };
 
 export const VacancyCard = ({ item }: VacancyCardProps) => {
+  const currentArea = useTypedSelector(
+    (state) => state.vacanciesReducer.currentArea
+  );
+
   return (
     <li className={styles["vacancy-card__item"]}>
       {item.name && (
@@ -133,7 +145,7 @@ export const VacancyCard = ({ item }: VacancyCardProps) => {
         </div>
       )}
 
-      {getArea(item.area.name)}
+      {getArea(item.area.name, currentArea)}
 
       <div className={styles["vacancy-card__actions"]}>
         <button
