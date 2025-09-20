@@ -6,6 +6,7 @@ export interface VacanciesType {
   id: string;
   name: string;
   area: {
+    id: string;
     name: string;
   };
   salary: {
@@ -19,18 +20,11 @@ export interface VacanciesType {
   employer: {
     name: string;
   };
-  schedule: {
-    name: string;
-  };
   work_format: [{ id: string }];
 }
 
-interface VacanciesState {
+export interface VacanciesState {
   vacancies: VacanciesType[];
-  //   responce: {
-  //     items: VacanciesType[];
-  //     pages: number;
-  //   };
   status: null | boolean;
   currentPage: number;
   currentArea: null | string;
@@ -41,7 +35,6 @@ interface VacanciesState {
 
 const initialState: VacanciesState = {
   vacancies: [],
-  //   responce: {},
   status: null,
   currentPage: 1,
   skill_set: ["TypeScript", "React", "Redux"],
@@ -103,7 +96,6 @@ export const vacanciesSlice = createSlice({
         state.status = false;
         const { items, pages }: { items: VacanciesType[]; pages: number } =
           action.payload;
-        // state.responce = action.payload;
         state.vacancies = items;
         state.pages = pages - 1;
       })
