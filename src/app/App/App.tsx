@@ -10,7 +10,7 @@ import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
 import { VacanciesList } from "../../pages";
 
-import { LoaderUI } from "../../shared";
+import { LoaderUI, NoResults } from "../../shared";
 
 import {
   Header,
@@ -72,6 +72,8 @@ export const App = () => {
 
           {status ? (
             <LoaderUI />
+          ) : vacancies.length === 0 ? (
+            <NoResults />
           ) : (
             <div className={styles["vacancies-field"]}>
               <VacanciesList items={vacancies} />
