@@ -5,17 +5,9 @@ import { type VacanciesType } from "./vacanciesSlice";
 
 const url = "https://api.hh.ru/vacancies";
 
-// const searchParams = new URLSearchParams({
-//   industry: 7,
-//   professional_role: 96,
-// });
-
 interface fetchVacanciesStateResponce {
   items: VacanciesType[];
   pages: number;
-  //   page: number;
-  //   per_page: number;
-  //   text: string;
 }
 
 interface getVacanciesProps {

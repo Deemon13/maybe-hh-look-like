@@ -10,6 +10,8 @@ import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
 
 import { VacanciesList } from "../../pages";
 
+import { LoaderUI } from "../../shared";
+
 import {
   Header,
   SearchBar,
@@ -26,6 +28,8 @@ export const App = () => {
   const vacancies = useTypedSelector(
     (state) => state.vacanciesReducer.vacancies
   );
+
+  const status = useTypedSelector((state) => state.vacanciesReducer.status);
 
   const currentPage = useTypedSelector(
     (state) => state.vacanciesReducer.currentPage
@@ -66,11 +70,15 @@ export const App = () => {
             <AreaSelect />
           </div>
 
-          <div className={styles["vacancies-field"]}>
-            <VacanciesList items={vacancies} />
+          {status ? (
+            <LoaderUI />
+          ) : (
+            <div className={styles["vacancies-field"]}>
+              <VacanciesList items={vacancies} />
 
-            <PaginationUI />
-          </div>
+              <PaginationUI />
+            </div>
+          )}
         </div>
       </AppShell.Main>
     </AppShell>
