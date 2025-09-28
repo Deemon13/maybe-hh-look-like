@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.69% </span>
+                <span class="strong">70.51% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>45/78</span>
+                <span class='fraction'>55/78</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.66% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/6</span>
+                <span class='fraction'>2/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.69% </span>
+                <span class="strong">70.51% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/78</span>
+                <span class='fraction'>55/78</span>
             </div>
         
             
@@ -251,39 +251,39 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -366,23 +366,23 @@ export const vacanciesSlice = createSlice({
 <span class="cstat-no" title="statement not covered" >        (skill) =&gt; skill !== action.payload</span>
 <span class="cstat-no" title="statement not covered" >      );</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
-    selectArea: <span class="fstat-no" title="function not covered" >(state, action) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      switch (action.payload) {</span>
-<span class="cstat-no" title="statement not covered" >        case "Все города":</span>
+    selectArea: (state, action) =&gt; {
+      switch (action.payload) {
+<span class="branch-0 cbranch-no" title="branch not covered" >        case "Все города":</span>
 <span class="cstat-no" title="statement not covered" >          state.currentArea = null;</span>
 <span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        case "Москва":</span>
-<span class="cstat-no" title="statement not covered" >          state.currentArea = "1";</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        case "Санкт-Петербург":</span>
+        case "Москва":
+          state.currentArea = "1";
+          break;
+<span class="branch-0 cbranch-no" title="branch not covered" >        case "Санкт-Петербург":</span>
 <span class="cstat-no" title="statement not covered" >          state.currentArea = "2";</span>
 <span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        default:</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >        default:</span>
 <span class="cstat-no" title="statement not covered" >          state.currentArea = null;</span>
 <span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >      state.currentPage = 1;</span>
-<span class="cstat-no" title="statement not covered" >    },</span>
+      }
+      state.currentPage = 1;
+    },
   },
   extraReducers: (builder) =&gt; {
     builder
@@ -418,7 +418,7 @@ export default vacanciesSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-21T12:49:46.120Z
+                at 2025-09-28T16:42:17.576Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>
