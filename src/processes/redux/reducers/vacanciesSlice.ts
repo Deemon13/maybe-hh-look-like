@@ -56,15 +56,15 @@ export const vacanciesSlice = createSlice({
     },
     addSkill: (state, action) => {
       const newSkillSet = state.skill_set.map((skill) => skill.toLowerCase());
-
       if (newSkillSet.includes(action.payload.toLowerCase())) {
-        console.log("already exist");
         state.skill_set = [...state.skill_set];
       } else {
         state.skill_set = [...state.skill_set, action.payload];
       }
     },
     removeSkill: (state, action) => {
+      console.log(action.payload);
+
       state.skill_set = state.skill_set.filter(
         (skill) => skill !== action.payload
       );
