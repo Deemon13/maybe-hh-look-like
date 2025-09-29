@@ -7,7 +7,7 @@ import type { VacanciesType } from "../../../processes/redux/reducers/vacanciesS
 
 import { VacancyCard } from "./VacancyCard";
 
-describe("VacancyCard component", function () {
+describe("VacancyCard component, variant - Remote", function () {
   const mockItem: VacanciesType = {
     id: "125512027",
     name: "Senior frontend developer",
@@ -35,5 +35,63 @@ describe("VacancyCard component", function () {
     expect(screen.getByText(/Опыт 3-6 лет/i));
     expect(screen.getByText(/4000 - 4700 RUR/i));
     expect(screen.findAllByRole("button"));
+  });
+});
+
+describe("VacancyCard component, variant - field_work", function () {
+  const mockItem: VacanciesType = {
+    id: "125512028",
+    name: "Middle frontend developer",
+    area: { id: "2", name: "Санкт-Петербург" },
+    employer: {
+      name: "Ozon",
+    },
+    experience: { id: "moreThan6" },
+    work_format: [{ id: "FIELD_WORK" }],
+    salary: {
+      from: 4000,
+      to: 4000,
+      currency: "RUR",
+    },
+  };
+
+  it("should render component VacancyCard", () => {
+    render(
+      <Provider store={setupStore}>
+        <VacancyCard item={mockItem} />
+      </Provider>
+    );
+    expect(screen.getByText(/Middle frontend developer/i));
+    expect(screen.getByText(/Опыт более 6 лет/i));
+    expect(screen.getByText(/Разъездной/i));
+    expect(screen.getByText(/4000 RUR/i));
+  });
+});
+
+describe("VacancyCard component, variant - without experience", function () {
+  const mockItem: VacanciesType = {
+    id: "125512028",
+    name: "Middle frontend developer",
+    area: { id: "3", name: "Астана" },
+    employer: {
+      name: "Ozon",
+    },
+    experience: { id: "noExperience" },
+    work_format: [{ id: "FIELD_WORK" }],
+    salary: {
+      from: 4000,
+      to: 4000,
+      currency: "RUR",
+    },
+  };
+
+  it("should render component VacancyCard", () => {
+    render(
+      <Provider store={setupStore}>
+        <VacancyCard item={mockItem} />
+      </Provider>
+    );
+
+    expect(screen.getByText(/Без опыта/i));
   });
 });

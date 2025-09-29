@@ -5,7 +5,6 @@ import { setupStore } from "../../processes/redux/store/store";
 import { render } from "../../processes/test-utils/render";
 
 import { AreaSelect } from "./AreaSelect";
-// import { Select } from "@mantine/core";
 
 beforeAll(() => {
   vi.stubGlobal(
@@ -40,34 +39,3 @@ describe("AreaSelect component", function () {
     });
   });
 });
-
-// describe("", () => {
-//   let mockedAreaValue: string | null = "Москва";
-//   const mockClearArea = vi.fn(() => (mockedAreaValue = null));
-
-//   //   const mockedAreaValue = "Москва";
-
-//   it("", () => {
-//     render(
-//       <Provider store={setupStore}>
-//         {/* <AreaSelect /> */}
-//         <Select
-//           onClear={mockClearArea}
-//           data={["Все города", "Москва", "Санкт-Петербург"]}
-//           defaultValue={mockedAreaValue}
-//           clearable
-//         />
-//       </Provider>
-//     );
-
-//     // const clearButton = screen.getByText("Москва").previousElementSibling;
-//     // clearButton?.addEventListener("click", mockClearArea);
-//     // fireEvent.click(clearButton);
-//     // // console.log(clearButton);
-
-//     const selectArea = screen.getByRole("textbox");
-//     fireEvent.click;
-//     // expect(screen.getByText("Москва"));
-//     // fireEvent(node: selectArea, event: onClear);
-//   });
-// });
