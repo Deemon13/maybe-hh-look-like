@@ -1,4 +1,4 @@
-import type { VacanciesType } from "../../processes/redux/reducers/vacanciesSlice";
+import type { VacanciesType } from "../../app/redux/reducers/vacanciesSlice";
 
 import { VacancyCard } from "../../shared";
 

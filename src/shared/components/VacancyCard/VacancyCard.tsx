@@ -1,8 +1,8 @@
 import { Badge } from "@mantine/core";
 
-import { useTypedSelector } from "../../../processes/redux/hooks/redux";
+import { useTypedSelector } from "../../../app/redux/hooks/redux";
 
-import type { VacanciesType } from "../../../processes/redux/reducers/vacanciesSlice";
+import type { VacanciesType } from "../../../app/redux/reducers/vacanciesSlice";
 
 import styles from "./VacancyCard.module.css";
 

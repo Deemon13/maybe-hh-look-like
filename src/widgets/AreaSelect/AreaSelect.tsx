@@ -4,9 +4,9 @@ import { Select } from "@mantine/core";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../processes/redux/hooks/redux";
+} from "../../app/redux/hooks/redux";
 
-import { selectArea } from "../../processes/redux/reducers/vacanciesSlice";
+import { selectArea } from "../../app/redux/reducers/vacanciesSlice";
 
 import MapPin from "../../app/assets/main/map-pin.svg";
 

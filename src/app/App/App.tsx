@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { AppShell } from "@mantine/core";
 
-import {
-  useTypedDispatch,
-  useTypedSelector,
-} from "../../processes/redux/hooks/redux";
+import { useTypedDispatch, useTypedSelector } from "../redux/hooks/redux";
 
-import { fetchVacancies } from "../../processes/redux/reducers/VacanciesThunk";
+import { fetchVacancies } from "../redux/reducers/VacanciesThunk";
 
 import { VacanciesList } from "../../pages";
 

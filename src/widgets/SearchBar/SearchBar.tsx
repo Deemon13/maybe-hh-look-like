@@ -5,12 +5,12 @@ import { Title, Button, Group, TextInput } from "@mantine/core";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../processes/redux/hooks/redux";
+} from "../../app/redux/hooks/redux";
 
 import {
   setCurrentPage,
   inputSearchText,
-} from "../../processes/redux/reducers/vacanciesSlice";
+} from "../../app/redux/reducers/vacanciesSlice";
 
 import SearchIcon from "../../app/assets/search-bar/search.svg";
 
@@ -28,7 +28,6 @@ export const SearchBar = () => {
   const handleClickOnSearch = () => {
     dispatch(inputSearchText(searchInput));
     dispatch(setCurrentPage(1));
-    setSearchInput("");
   };
 
   const searchIcon = <img src={SearchIcon} alt="search-icon" />;

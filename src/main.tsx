@@ -7,7 +7,7 @@ import {
   type MantineColorsTuple,
 } from "@mantine/core";
 
-import { setupStore } from "./processes/redux/store/store";
+import { setupStore } from "./shared/store/store";
 
 import { App } from "./app";
 

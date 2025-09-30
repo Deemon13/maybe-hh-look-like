@@ -5,13 +5,13 @@ import { Title, Group, ActionIcon, TextInput, Pill } from "@mantine/core";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../processes/redux/hooks/redux";
+} from "../../app/redux/hooks/redux";
 
 import {
   setCurrentPage,
   addSkill,
   removeSkill,
-} from "../../processes/redux/reducers/vacanciesSlice";
+} from "../../app/redux/reducers/vacanciesSlice";
 
 import AddIcon from "../../app/assets/main/add-icon.svg";
 

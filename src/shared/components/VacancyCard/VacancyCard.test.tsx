@@ -1,9 +1,9 @@
 import { screen } from "@testing-library/react";
 import { expect, it, describe } from "vitest";
 import { Provider } from "react-redux";
-import { setupStore } from "../../../processes/redux/store/store";
-import { render } from "../../../processes/test-utils/render";
-import type { VacanciesType } from "../../../processes/redux/reducers/vacanciesSlice";
+import { setupStore } from "../../store/store";
+import { render } from "../../../app/test-utils/render";
+import type { VacanciesType } from "../../../app/redux/reducers/vacanciesSlice";
 
 import { VacancyCard } from "./VacancyCard";
 

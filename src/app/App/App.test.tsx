@@ -1,8 +1,8 @@
 import { screen, waitFor } from "@testing-library/react";
 import { expect, it, describe } from "vitest";
 import { Provider } from "react-redux";
-import { setupStore } from "../../processes/redux/store/store";
-import { render } from "../../processes/test-utils/render";
+import { setupStore } from "../../shared/store/store";
+import { render } from "../test-utils/render";
 
 import { App } from "./App";
 

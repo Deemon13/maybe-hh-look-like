@@ -3,9 +3,9 @@ import { Group, Pagination, useMantineTheme } from "@mantine/core";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../processes/redux/hooks/redux";
+} from "../../app/redux/hooks/redux";
 
-import { setCurrentPage } from "../../processes/redux/reducers/vacanciesSlice";
+import { setCurrentPage } from "../../app/redux/reducers/vacanciesSlice";
 
 export const PaginationUI = () => {
   const dispatch = useTypedDispatch();
